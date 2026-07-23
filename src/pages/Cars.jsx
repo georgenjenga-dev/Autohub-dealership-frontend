@@ -11,11 +11,11 @@ function Cars() {
     api
       .get("vehicles/")
       .then((response) => {
+        console.log(response.data);
+        console.log(response.data.results);
         setCars(response.data.results);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   }, []);
 
   const filteredCars = cars.filter((car) => {

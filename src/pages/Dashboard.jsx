@@ -6,16 +6,14 @@ function Dashboard() {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("access");
-
     axios
-      .get("http://127.0.0.1:8000/api/dashboard/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      .get("http://127.0.0.1:8000/api/dashboard/")
+      .then((response) => {
+        setStats(response.data);
       })
-      .then((response) => setStats(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   if (!stats) {
@@ -30,14 +28,12 @@ function Dashboard() {
     <div className="container">
 
       <div className="dashboard-header">
-
         <h1>Welcome to AutoHub Dashboard 👋</h1>
 
         <p>
           Manage your reservations, browse vehicles and communicate with our
           dealership from one place.
         </p>
-
       </div>
 
       <div className="dashboard-grid">
@@ -105,11 +101,8 @@ function Dashboard() {
         <h2>Recent Activity</h2>
 
         <p>✔ Browse available vehicles.</p>
-
         <p>✔ Reserve a vehicle.</p>
-
         <p>✔ Contact the dealership through WhatsApp.</p>
-
         <p>✔ Track your reservations from your dashboard.</p>
 
       </div>
