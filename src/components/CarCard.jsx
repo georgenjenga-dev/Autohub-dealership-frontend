@@ -2,59 +2,31 @@ import { Link } from "react-router-dom";
 
 function CarCard({ car }) {
   return (
-    <div className="car-card">
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        boxShadow: "0 0 10px rgba(0,0,0,.2)",
+      }}
+    >
+      <img
+        src={car.main_image}
+        alt={car.model}
+        style={{
+          width: "100%",
+          height: "220px",
+          objectFit: "cover",
+        }}
+      />
 
-      <div className="car-image-container">
+      <h2>{car.brand.name} {car.model}</h2>
 
-       <img
-  src={car.main_image}
-  alt={car.model}
-/>
+      <p>KSh {car.price}</p>
 
-        <span
-          className={
-            car.is_available
-              ? "status available"
-              : "status sold"
-          }
-        >
-          {car.is_available ? "Available" : "Sold"}
-        </span>
-
-      </div>
-
-      <div className="car-info">
-
-        <h2>
-          {car.brand.name} {car.model}
-        </h2>
-
-        <h3 className="price">
-          KSh {Number(car.price).toLocaleString()}
-        </h3>
-
-        <div className="car-specs">
-
-          <span>📅 {car.year}</span>
-
-          <span>⛽ {car.fuel_type}</span>
-
-          <span>⚙ {car.transmission}</span>
-
-        </div>
-
-        <p>
-          <strong>Mileage:</strong> {Number(car.mileage).toLocaleString()} km
-        </p>
-
-        <Link to={`/cars/${car.id}`}>
-          <button className="details-btn">
-            View Details
-          </button>
-        </Link>
-
-      </div>
-
+      <Link to={`/cars/${car.id}`}>
+        <button>View Details</button>
+      </Link>
     </div>
   );
 }
