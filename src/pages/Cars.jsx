@@ -18,14 +18,7 @@ function Cars() {
       .catch((error) => console.log(error));
   }, []);
 
-  const filteredCars = cars.filter((car) => {
-    const query = search.toLowerCase();
-
-    return (
-      car.model.toLowerCase().includes(query) ||
-      car.brand.name.toLowerCase().includes(query)
-    );
-  });
+ const filteredCars = cars;
 
   return (
     <div className="container">
