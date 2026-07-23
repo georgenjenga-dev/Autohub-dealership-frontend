@@ -1,43 +1,67 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
 
-    return (
+  const token = localStorage.getItem("access");
 
-        <nav className="navbar">
+  const handleLogout = () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
 
-            <Link className="logo" to="/">
-                 AutoHub
-            </Link>
+    alert("Logged out successfully!");
 
-            <ul>
+    navigate("/login");
+  };
 
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
+  return (
+    <nav className="navbar">
+      <Link className="logo" to="/">
+        🚗 AutoHub
+      </Link>
 
-                <li>
-                    <Link to="/cars">Cars</Link>
-                </li>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
 
-                <li>
-                    <Link to="/contact">Contact</Link>
-                </li>
+        <li>
+          <Link to="/cars">Cars</Link>
+        </li>
 
-                <li>
-                    <Link to="/login">Login</Link>
-                </li>
+        <li>
+          <Link to="/contact">Contact</Link>
+        </li>
 
-                <li>
-                    <Link to="/register">Register</Link>
-                </li>
+        {!token ? (
+          <>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
 
-            </ul>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
 
-        </nav>
-
-    )
-
+            <li>
+              <button
+                onClick={handleLogout}
+                className="logout-btn"
+              >
+                Logout
+              </button>
+            </li>
+          </>
+        )}
+      </ul>
+    </nav>
+  );
 }
 
 export default Navbar;

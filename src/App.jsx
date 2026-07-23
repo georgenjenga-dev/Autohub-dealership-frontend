@@ -9,6 +9,10 @@ import CarDetails from "./pages/CarDetails";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import MyReservations from "./pages/MyReservations";
+import MyPayments from "./pages/MyPayments";
+import MyInquiries from "./pages/MyInquiries";
 
 function App() {
   return (
@@ -22,6 +26,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/my-reservations" element={<MyReservations />} />
+       <Route path="/my-payments" element={<MyPayments />} />
+       <Route path="/my-inquiries" element={<MyInquiries />} />
       </Routes>
 
       <Footer />

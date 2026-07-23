@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 function CarDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [car, setCar] = useState(null);
 
@@ -15,33 +16,28 @@ function CarDetails() {
   }, [id]);
 
   const handleReserve = async () => {
-    const token = localStorage.getItem("access");
+  const token = localStorage.getItem("access");
 
-    if (!token) {
-      alert("Please login first.");
-      return;
-    }
-
-    try {
-      await axios.post(
-        "http://127.0.0.1:8000/api/reservations/",
-        {
-          vehicle: car.id,
-          notes: "Reservation from website",
+  try {
+    await axios.post(
+      "http://127.0.0.1:8000/api/reservations/",
+      {
+        vehicle: car.id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      }
+    );
+    alert("Reservation successful!");
 
-      alert("Reservation created successfully!");
-    } catch (error) {
-      console.error(error.response?.data || error);
-      alert("Reservation failed.");
-    }
-  };
+navigate("/my-reservations");
+  } catch (error) {
+    console.log(error.response?.data);
+    alert(JSON.stringify(error.response?.data));
+  }
+};
 
   if (!car) {
     return <h2>Loading...</h2>;
