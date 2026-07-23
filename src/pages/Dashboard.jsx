@@ -7,7 +7,7 @@ function Dashboard() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/dashboard/")
+      .get("https://autohub-delership-backend.vercel.app//api/dashboard/")
       .then((response) => {
         setStats(response.data);
       })

@@ -8,7 +8,7 @@ function MyInquiries() {
     const token = localStorage.getItem("access");
 
     axios
-      .get("http://127.0.0.1:8000/api/inquiries/my_inquiries/", {
+      .get("https://autohub-delership-backend.vercel.app//api/inquiries/my_inquiries/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
