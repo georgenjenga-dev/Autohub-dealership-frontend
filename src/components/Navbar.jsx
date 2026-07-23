@@ -18,7 +18,7 @@ function Navbar() {
 
   axios
     .get(
-      "http://127.0.0.1:8000/api/me/",
+      "https://autohub-delership-backend.vercel.app//api/me/",
       {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -19,7 +19,7 @@ function Contact() {
     try {
 
       await axios.post(
-        "http://127.0.0.1:8000/api/inquiries/",
+        "https://autohub-delership-backend.vercel.app//api/inquiries/",
         {
           vehicle: vehicle,
           message: message,

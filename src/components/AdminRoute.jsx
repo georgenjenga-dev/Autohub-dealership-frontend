@@ -15,7 +15,7 @@ function AdminRoute({ children }) {
     }
 
     axios
-      .get("http://127.0.0.1:8000/api/me/", {
+      .get("https://autohub-delership-backend.vercel.app//api/me/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

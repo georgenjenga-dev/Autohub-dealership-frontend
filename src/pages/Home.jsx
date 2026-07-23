@@ -7,7 +7,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/vehicles/")
+      .get("https://autohub-delership-backend.vercel.app//api/vehicles/")
       .then((response) => {
         const vehicles = response.data.results || response.data;
         setCars(vehicles.slice(0, 3));

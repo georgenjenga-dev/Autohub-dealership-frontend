@@ -22,7 +22,7 @@ function MyReservations() {
 
     try {
       await axios.post(
-        "http://127.0.0.1:8000/api/payments/",
+        "https://autohub-delership-backend.vercel.app//api/payments/",
         {
           reservation: reservation.id,
           amount: 5000,

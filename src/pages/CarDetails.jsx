@@ -35,7 +35,7 @@ function CarDetails() {
 
   try {
     await axios.post(
-      "http://127.0.0.1:8000/api/reservations/",
+      "https://autohub-delership-backend.vercel.app//api/reservations/",
       {
         vehicle: car.id,
         notes: "",
