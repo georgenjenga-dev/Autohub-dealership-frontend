@@ -19,41 +19,69 @@ function MyPayments() {
 
   return (
     <div className="container">
-      <h1>My Payments</h1>
+
+      <h1 className="page-title">My Payments</h1>
 
       {payments.length === 0 ? (
-        <p>No payments found.</p>
+
+        <div className="empty-box">
+          <h2>No Payments Found</h2>
+          <p>You haven't made any payments yet.</p>
+        </div>
+
       ) : (
-        payments.map((payment) => (
-          <div
-            key={payment.id}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "10px",
-              padding: "20px",
-              marginBottom: "20px",
-            }}
-          >
-            <h2>{payment.reservation_vehicle}</h2>
 
-            <p>
-              <strong>Amount:</strong> Ksh {payment.amount}
-            </p>
+        <div className="payment-grid">
 
-            <p>
-              <strong>Method:</strong> {payment.payment_method}
-            </p>
+          {payments.map((payment) => (
 
-            <p>
-              <strong>Status:</strong> {payment.status}
-            </p>
+            <div
+              className="payment-card"
+              key={payment.id}
+            >
 
-            <p>
-              <strong>Reference:</strong> {payment.transaction_reference}
-            </p>
-          </div>
-        ))
+              <h2>💳 {payment.reservation_vehicle}</h2>
+
+              <h3 className="payment-price">
+                KSh {Number(payment.amount).toLocaleString()}
+              </h3>
+
+              <p>
+                <strong>Payment Method:</strong>
+                <br />
+                {payment.payment_method}
+              </p>
+
+              <p>
+                <strong>Status:</strong>
+
+                <span
+                  className={`status-badge ${payment.status.toLowerCase()}`}
+                >
+                  {payment.status}
+                </span>
+              </p>
+
+              <p>
+                <strong>Reference:</strong>
+                <br />
+                {payment.transaction_reference}
+              </p>
+
+              <p>
+                <strong>Date:</strong>
+                <br />
+                {new Date(payment.payment_date).toLocaleString()}
+              </p>
+
+            </div>
+
+          ))}
+
+        </div>
+
       )}
+
     </div>
   );
 }

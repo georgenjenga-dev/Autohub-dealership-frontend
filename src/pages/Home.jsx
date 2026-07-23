@@ -1,111 +1,166 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Home() {
-  const featuredCars = [
-    {
-      id: 1,
-      name: "Toyota Corolla",
-      price: "Ksh 2,500,000",
-      image:
-        "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800",
-    },
-    {
-      id: 2,
-      name: "BMW X5",
-      price: "Ksh 7,500,000",
-      image:
-        "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800",
-    },
-    {
-      id: 3,
-      name: "Mercedes C-Class",
-      price: "Ksh 5,300,000",
-      image:
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800",
-    },
-  ];
+  const [cars, setCars] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/vehicles/")
+      .then((response) => {
+        const vehicles = response.data.results || response.data;
+        setCars(vehicles.slice(0, 3));
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <>
       {/* Hero Section */}
-    <section className="hero">
 
-    <h1>Drive Your Dream Today</h1>
+      <section className="hero">
 
-    <p>
+        <h1>Find Your Dream Car Today</h1>
 
-        Explore quality vehicles from trusted brands.
+        <p>
+          Browse premium vehicles from trusted dealerships across Kenya.
+        </p>
 
-    </p>
+        <div className="hero-buttons">
 
-    <div className="hero-buttons">
-
-        <Link to="/cars">
-
+          <Link to="/cars">
             <button className="btn">
-
-                Browse Inventory
-
+              Browse Cars
             </button>
+          </Link>
 
-        </Link>
-
-        <Link to="/contact">
-
+          <Link to="/contact">
             <button className="secondary-btn">
-
-                Contact Us
-
+              Contact Dealer
             </button>
+          </Link>
 
-        </Link>
+        </div>
 
-    </div>
+      </section>
+
+      {/* Featured Cars */}
+
+      <section className="featured">
+
+        <h2>Featured Vehicles</h2>
+
+        <div className="featured-grid">
+
+          {cars.map((car) => (
+
+            <div className="featured-card" key={car.id}>
+<img
+  src={car.main_image}
+  alt={car.model}
+/>
+
+              <h3>
+                {car.brand.name} {car.model}
+              </h3>
+
+              <p>Ksh {car.price}</p>
+
+              <Link to={`/cars/${car.id}`}>
+                <button className="details-btn">
+                  View Details
+                </button>
+              </Link>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </section>
+      <section className="stats-section">
+
+  <div className="stat-card">
+    <h2>500+</h2>
+    <p>Happy Customers</p>
+  </div>
+
+  <div className="stat-card">
+    <h2>100+</h2>
+    <p>Vehicles Available</p>
+  </div>
+
+  <div className="stat-card">
+    <h2>15+</h2>
+    <p>Trusted Brands</p>
+  </div>
+
+  <div className="stat-card">
+    <h2>24/7</h2>
+    <p>Customer Support</p>
+  </div>
 
 </section>
 
-      {/* Featured Cars */}
-      <section className="featured">
-        <h2>Featured Cars</h2>
-
-        <div className="featured-grid">
-          {featuredCars.map((car) => (
-            <div className="featured-card" key={car.id}>
-              <img src={car.image} alt={car.name} />
-
-              <h3>{car.name}</h3>
-
-              <p>{car.price}</p>
-
-              <Link to="/cars">
-                <button className="btn">View Cars</button>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Why Choose Us */}
+
       <section className="why-us">
+
         <h2>Why Choose AutoHub?</h2>
 
         <div className="features">
+
           <div className="feature-box">
-            <h3>🚗 Quality Vehicles</h3>
-            <p>Every vehicle is inspected before being listed.</p>
+            <h3>🚗 Premium Vehicles</h3>
+
+            <p>
+              Carefully inspected vehicles from trusted dealerships.
+            </p>
+
           </div>
 
           <div className="feature-box">
-            <h3>💰 Affordable Prices</h3>
-            <p>Competitive pricing with flexible payment options.</p>
+
+            <h3>💰 Fair Pricing</h3>
+
+            <p>
+              Competitive pricing with transparent vehicle information.
+            </p>
+
           </div>
 
           <div className="feature-box">
-            <h3>🤝 Trusted Service</h3>
-            <p>Professional customer support before and after purchase.</p>
+
+            <h3>📱 Direct Dealer Contact</h3>
+
+            <p>
+              Reserve online and chat directly with our sales team via WhatsApp.
+            </p>
+
           </div>
+
         </div>
+
       </section>
+      <section className="brands-section">
+
+  <h2>Popular Brands</h2>
+
+  <div className="brands-grid">
+
+    <div className="brand-item">🚗 Toyota</div>
+
+    <div className="brand-item">🏁 BMW</div>
+
+    <div className="brand-item">⭐ Mercedes-Benz</div>
+
+    <div className="brand-item">🚙 Nissan</div>
+
+  </div>
+
+</section>
     </>
   );
 }

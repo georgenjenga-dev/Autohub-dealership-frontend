@@ -45,64 +45,74 @@ function MyReservations() {
     }
   };
 
-  return (
-    <div className="container">
-      <h1>My Reservations</h1>
+ return (
+  <div className="container">
 
-      {reservations.length === 0 ? (
-        <p>No reservations found.</p>
-      ) : (
-        reservations.map((reservation) => (
+    <h1 className="page-title">My Reservations</h1>
+
+    {reservations.length === 0 ? (
+
+      <div className="empty-box">
+        <h2>No Reservations Yet</h2>
+        <p>You haven't reserved any vehicles.</p>
+      </div>
+
+    ) : (
+
+      <div className="reservation-grid">
+
+        {reservations.map((reservation) => (
+
           <div
+            className="reservation-card"
             key={reservation.id}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "10px",
-              padding: "20px",
-              marginBottom: "20px",
-            }}
           >
+
             <h2>
-              {reservation.brand} {reservation.vehicle_name}
+              🚗 {reservation.brand} {reservation.vehicle_name}
             </h2>
 
             <p>
-              <strong>Status:</strong> {reservation.status}
+              <strong>Status:</strong>
+              <span className={`status-badge ${reservation.status.toLowerCase()}`}>
+                {reservation.status}
+              </span>
             </p>
 
             <p>
-              <strong>Date:</strong> {reservation.reservation_date}
+              <strong>Reserved:</strong>
+              <br />
+              {new Date(reservation.reservation_date).toLocaleString()}
             </p>
 
             <p>
-              <strong>Notes:</strong> {reservation.notes}
+              <strong>Notes:</strong>
+              <br />
+              {reservation.notes || "No notes"}
             </p>
 
-           <a
-  href={`https://wa.me/254716323929?text=Hello%20AutoHub,%20I%20have%20reserved%20the%20${reservation.brand}%20${reservation.vehicle_name}%20and%20would%20like%20to%20schedule%20a%20viewing.`}
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <button
-    style={{
-      marginTop: "15px",
-      padding: "12px 20px",
-      background: "#25D366",
-      color: "white",
-      border: "none",
-      borderRadius: "8px",
-      cursor: "pointer",
-      fontWeight: "bold",
-    }}
-  >
-    Contact Dealer on WhatsApp
-  </button>
-</a>
+           
+            <a
+              href={`https://wa.me/254716323929?text=Hello AutoHub, I reserved the ${reservation.brand} ${reservation.vehicle_name} and would like more information.`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button className="whatsapp-btn">
+                💬 Contact Dealer
+              </button>
+            </a>
+
           </div>
-        ))
-      )}
-    </div>
-  );
+
+        ))}
+
+      </div>
+
+    )}
+
+  </div>
+);
+  
 }
 
 export default MyReservations;

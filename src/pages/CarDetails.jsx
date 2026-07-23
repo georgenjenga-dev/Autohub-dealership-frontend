@@ -1,28 +1,44 @@
-import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function CarDetails() {
   const { id } = useParams();
+  const [car, setCar] = useState(null);
   const navigate = useNavigate();
 
-  const [car, setCar] = useState(null);
 
-  useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/api/vehicles/${id}/`)
-      .then((response) => setCar(response.data))
-      .catch((error) => console.log(error));
-  }, [id]);
 
-  const handleReserve = async () => {
+ useEffect(() => {
+  axios
+    .get(`http://127.0.0.1:8000/api/vehicles/${id}/`)
+    .then((response) => setCar(response.data))
+    .catch((error) => console.log(error));
+}, [id]);
+
+  if (!car) {
+    return (
+      <div className="container">
+        <h2>Loading vehicle...</h2>
+      </div>
+    );
+  }
+  const reserveVehicle = async () => {
   const token = localStorage.getItem("access");
+
+  if (!token) {
+    alert("Please login first.");
+    navigate("/login");
+    return;
+  }
 
   try {
     await axios.post(
       "http://127.0.0.1:8000/api/reservations/",
       {
         vehicle: car.id,
+        notes: "",
       },
       {
         headers: {
@@ -30,57 +46,104 @@ function CarDetails() {
         },
       }
     );
-    alert("Reservation successful!");
 
-navigate("/my-reservations");
+    alert("Vehicle reserved successfully!");
+
+    navigate("/my-reservations");
+
   } catch (error) {
-    console.log(error.response?.data);
-    alert(JSON.stringify(error.response?.data));
+    console.log(error);
+
+    alert("Reservation failed.");
   }
 };
-
-  if (!car) {
-    return <h2>Loading...</h2>;
-  }
 
   return (
     <div className="container">
 
-      <img
-        src={car.main_image}
-        alt={car.model}
-        style={{
-          width: "500px",
-          borderRadius: "10px",
-        }}
-      />
+      <div className="details-container">
 
-      <h1>{car.brand.name} {car.model}</h1>
+        <div className="details-image">
 
-      <p><strong>Year:</strong> {car.year}</p>
+          <img
+  src={car.main_image}
+  alt={car.model}
+/>
+        </div>
 
-      <p><strong>Fuel:</strong> {car.fuel_type}</p>
+        <div className="details-info">
 
-      <p><strong>Transmission:</strong> {car.transmission}</p>
+          <h1>
+            {car.brand.name} {car.model}
+          </h1>
 
-      <p><strong>Mileage:</strong> {car.mileage} km</p>
+          <h2 className="details-price">
+            KSh {Number(car.price).toLocaleString()}
+          </h2>
 
-      <p><strong>Color:</strong> {car.color}</p>
+          <span
+            className={
+              car.is_available
+                ? "status available"
+                : "status sold"
+            }
+          >
+            {car.is_available ? "Available" : "Sold"}
+          </span>
 
-      <p><strong>Price:</strong> Ksh {car.price}</p>
+          <div className="spec-grid">
 
-      <p>{car.description}</p>
+            <div>
+              <strong>Year</strong>
+              <p>{car.year}</p>
+            </div>
 
-      <button
-        onClick={handleReserve}
-        style={{
-          marginTop: "20px",
-          padding: "12px 20px",
-          cursor: "pointer",
-        }}
-      >
-        Reserve Vehicle
-      </button>
+            <div>
+              <strong>Fuel</strong>
+              <p>{car.fuel_type}</p>
+            </div>
+
+            <div>
+              <strong>Transmission</strong>
+              <p>{car.transmission}</p>
+            </div>
+
+            <div>
+              <strong>Mileage</strong>
+              <p>{Number(car.mileage).toLocaleString()} km</p>
+            </div>
+
+          </div>
+
+          <h3>Description</h3>
+
+          <p className="description">
+            {car.description}
+          </p>
+
+          <div className="details-buttons">
+
+           <button
+  className="reserve-btn"
+  onClick={reserveVehicle}
+>
+  📅 Reserve Vehicle
+</button>
+            <a
+              href="https://wa.me/254700000000"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button className="whatsapp-btn">
+                💬 WhatsApp Dealer
+              </button>
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
   );
