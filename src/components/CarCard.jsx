@@ -2,33 +2,31 @@ import { Link } from "react-router-dom";
 
 function CarCard({ car }) {
   return (
-    <div className="car-card">
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        boxShadow: "0 0 10px rgba(0,0,0,.2)",
+      }}
+    >
       <img
-   src={car.main_image}
-   alt={car.model}
-   style={{width: "300px"}}
-   />
+        src={car.main_image}
+        alt={car.model}
+        style={{
+          width: "100%",
+          height: "220px",
+          objectFit: "cover",
+        }}
+      />
 
+      <h2>{car.brand.name} {car.model}</h2>
 
+      <p>KSh {car.price}</p>
 
-
-      <div className="car-info">
-        <h2>{car.brand.name} {car.model}</h2>
-
-        <p><strong>Year:</strong> {car.year}</p>
-
-        <p><strong>Fuel:</strong> {car.fuel_type}</p>
-
-        <p><strong>Transmission:</strong> {car.transmission}</p>
-
-        <p><strong>Price:</strong> Ksh {car.price}</p>
-
-        <Link to={`/cars/${car.id}`}>
-          <button className="details-btn">
-            View Details
-          </button>
-        </Link>
-      </div>
+      <Link to={`/cars/${car.id}`}>
+        <button>View Details</button>
+      </Link>
     </div>
   );
 }

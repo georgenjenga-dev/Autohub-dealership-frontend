@@ -14,9 +14,11 @@ function MyInquiries() {
         },
       })
       .then((response) => setInquiries(response.data))
-      .catch((error) => console.log(error));
-  }, []);
-
+     .catch((error)=>{
+    console.log("INQUIRY ERROR:", error.response?.data);
+    alert(JSON.stringify(error.response?.data));
+  })
+})
   return (
     <div className="container">
       <h1>My Inquiries</h1>

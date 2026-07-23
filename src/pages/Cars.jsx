@@ -8,17 +8,24 @@ function Cars() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    api.get("vehicles/")
+    api
+      .get("vehicles/")
       .then((response) => {
+        console.log(response.data);
+        console.log(response.data.results);
         setCars(response.data.results);
       })
       .catch((error) => console.log(error));
   }, []);
 
-  const filteredCars = cars.filter((car) =>
-    car.model.toLowerCase().includes(search.toLowerCase()) ||
-    car.brand.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredCars = cars.filter((car) => {
+    const query = search.toLowerCase();
+
+    return (
+      car.model.toLowerCase().includes(query) ||
+      car.brand.name.toLowerCase().includes(query)
+    );
+  });
 
   return (
     <div className="container">
@@ -26,11 +33,17 @@ function Cars() {
 
       <SearchBar search={search} setSearch={setSearch} />
 
-      <div className="cars-grid">
-        {filteredCars.map((car) => (
-          <CarCard key={car.id} car={car} />
-        ))}
-      </div>
+      {filteredCars.length === 0 ? (
+        <h3 style={{ marginTop: "30px", textAlign: "center" }}>
+          No vehicles found.
+        </h3>
+      ) : (
+        <div className="cars-grid">
+          {filteredCars.map((car) => (
+            <CarCard key={car.id} car={car} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

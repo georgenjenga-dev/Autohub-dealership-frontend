@@ -6,118 +6,104 @@ function Dashboard() {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("access");
-
     axios
-      .get("http://127.0.0.1:8000/api/dashboard/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      .get("http://127.0.0.1:8000/api/dashboard/")
+      .then((response) => {
+        setStats(response.data);
       })
-      .then((response) => setStats(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   if (!stats) {
-    return <h2>Loading Dashboard...</h2>;
+    return (
+      <div className="container">
+        <h2>Loading Dashboard...</h2>
+      </div>
+    );
   }
 
   return (
     <div className="container">
 
-      <h1>🚗 Customer Dashboard</h1>
+      <div className="dashboard-header">
+        <h1>Welcome to AutoHub Dashboard 👋</h1>
 
-      <p>
-        Welcome to AutoHub. Manage your reservations and communicate with our
-        sales team from one place.
-      </p>
+        <p>
+          Manage your reservations, browse vehicles and communicate with our
+          dealership from one place.
+        </p>
+      </div>
 
       <div className="dashboard-grid">
 
         <div className="card">
+          <h1>🚗</h1>
           <h2>{stats.vehicles}</h2>
           <p>Total Vehicles</p>
         </div>
 
         <div className="card">
+          <h1>✅</h1>
           <h2>{stats.available_vehicles}</h2>
           <p>Available Vehicles</p>
         </div>
 
         <div className="card">
+          <h1>📅</h1>
           <h2>{stats.reservations}</h2>
-          <p>Total Reservations</p>
+          <p>Reservations</p>
         </div>
 
         <div className="card">
+          <h1>👤</h1>
           <h2>{stats.customers}</h2>
           <p>Customers</p>
         </div>
 
         <div className="card">
+          <h1>🏷️</h1>
           <h2>{stats.brands}</h2>
-          <p>Vehicle Brands</p>
+          <p>Brands</p>
         </div>
 
       </div>
 
-      <h2 style={{ marginTop: "50px" }}>
-        Quick Actions
-      </h2>
+      <div className="quick-actions">
 
-      <div className="dashboard-grid">
+        <h2>Quick Actions</h2>
 
-        <div className="card">
-          <h3>🚘 Browse Cars</h3>
-
-          <p>
-            Explore all available vehicles.
-          </p>
+        <div className="dashboard-buttons">
 
           <Link to="/cars">
-            <button>Browse</button>
+            <button>🚗 Browse Cars</button>
           </Link>
-        </div>
-
-        <div className="card">
-          <h3>📅 My Reservations</h3>
-
-          <p>
-            View all your reservations.
-          </p>
 
           <Link to="/my-reservations">
-            <button>Open</button>
+            <button>📅 My Reservations</button>
           </Link>
-        </div>
-
-        <div className="card">
-          <h3>💬 My Inquiries</h3>
-
-          <p>
-            Track your inquiries.
-          </p>
 
           <Link to="/my-inquiries">
-            <button>Open</button>
+            <button>💬 My Inquiries</button>
           </Link>
+
+          <Link to="/contact">
+            <button>☎ Contact Dealer</button>
+          </Link>
+
         </div>
 
-        <div className="card">
-          <h3>📱 Contact Dealer</h3>
+      </div>
 
-          <p>
-            Chat instantly with our sales team.
-          </p>
+      <div className="activity-box">
 
-          <a
-            href="https://wa.me/254712345678"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button>WhatsApp</button>
-          </a>
-        </div>
+        <h2>Recent Activity</h2>
+
+        <p>✔ Browse available vehicles.</p>
+        <p>✔ Reserve a vehicle.</p>
+        <p>✔ Contact the dealership through WhatsApp.</p>
+        <p>✔ Track your reservations from your dashboard.</p>
 
       </div>
 

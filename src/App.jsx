@@ -13,6 +13,11 @@ import Dashboard from "./pages/Dashboard";
 import MyReservations from "./pages/MyReservations";
 import MyPayments from "./pages/MyPayments";
 import MyInquiries from "./pages/MyInquiries";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminRoute from "./components/AdminRoute";
+import About from "./pages/About";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -20,16 +25,58 @@ function App() {
       <Navbar />
 
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/cars" element={<Cars />} />
         <Route path="/cars/:id" element={<CarDetails />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/my-reservations" element={<MyReservations />} />
-       <Route path="/my-payments" element={<MyPayments />} />
-       <Route path="/my-inquiries" element={<MyInquiries />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/my-reservations"
+          element={
+            <ProtectedRoute>
+              <MyReservations />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/my-payments"
+          element={
+            <ProtectedRoute>
+              <MyPayments />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/my-inquiries"
+          element={
+            <ProtectedRoute>
+              <MyInquiries />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+  path="/admin-dashboard"
+  element={
+    <AdminRoute>
+      <AdminDashboard />
+    </AdminRoute>
+  }
+/>
       </Routes>
 
       <Footer />
