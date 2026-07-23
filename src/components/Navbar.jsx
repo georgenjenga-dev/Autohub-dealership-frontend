@@ -11,19 +11,28 @@ function Navbar() {
   const token = localStorage.getItem("access");
 
   useEffect(() => {
-    if (!token) return;
 
-    axios
-      .get("http://127.0.0.1:8000/api/me/", {
+  const token = localStorage.getItem("access");
+
+  if (!token) return;
+
+  axios
+    .get(
+      "http://127.0.0.1:8000/api/me/",
+      {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      })
-      .then((response) => {
-        setIsStaff(response.data.is_staff);
-      })
-      .catch((error) => console.log(error));
-  }, [token]);
+      }
+    )
+    .then((response) => {
+      setIsStaff(response.data.is_staff);
+    })
+    .catch((error)=>{
+      console.log(error.response?.data);
+    });
+
+}, []);
 
   const logout = () => {
     localStorage.removeItem("access");
