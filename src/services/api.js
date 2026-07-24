@@ -1,9 +1,20 @@
 import axios from "axios";
 
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL;
+const defaultBaseUrl = rawBaseUrl
+  ? rawBaseUrl
+  : typeof window !== "undefined" &&
+    ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname)
+  ? "http://127.0.0.1:8000/api"
+  : "https://autohub-delership-backend.vercel.app/api";
+
+const normalizedBaseUrl = defaultBaseUrl
+  .replace(/\/+$/g, "")
+  .replace(/\/api$/i, "");
+const baseURL = `${normalizedBaseUrl}/api/`;
+
 const api = axios.create({
-  baseURL:
-    import.meta.env.VITE_API_BASE_URL ||
-    "https://autohub-delership-backend.vercel.app/api/",
+  baseURL,
   headers: {
     "Content-Type": "application/json",
   },
