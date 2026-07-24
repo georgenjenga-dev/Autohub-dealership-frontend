@@ -776,6 +776,37 @@ h1, h2, h3, h4, h5 { font-weight: 700; line-height: 1.25; letter-spacing: -.01em
 /* ── Vehicle Detail ──────────────────────────────────────────────── */
 .container { width: 90%; max-width: 1200px; margin: auto; padding: 50px 0; }
 
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-content {
+  flex: 1;
+}
+
+.about-page {
+  min-height: calc(100vh - 70px - 260px);
+  padding-bottom: 1rem;
+}
+
 .breadcrumb {
   display: flex;
   align-items: center;

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function About() {
   return (
-    <div className="container">
+    <div className="container about-page">
 
       <section className="about-hero">
         <h1>About AutoHub</h1>
