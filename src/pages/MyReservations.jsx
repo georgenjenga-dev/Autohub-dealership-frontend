@@ -1,42 +1,26 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function MyReservations() {
   const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("access");
-
-    axios
-      .get("http://127.0.0.1:8000/api/reservations/my_reservations/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    api
+      .get("reservations/my_reservations/")
       .then((response) => setReservations(response.data))
       .catch((error) => console.log(error));
   }, []);
 
   const handlePayment = async (reservation) => {
-    const token = localStorage.getItem("access");
-
     try {
-      await axios.post(
-        "https://autohub-delership-backend.vercel.app//api/payments/",
-        {
-          reservation: reservation.id,
-          amount: 5000,
-          payment_method: "Cash",
-          bank_name: "",
-          account_number: "",
-          transaction_reference: "TXN" + Date.now(),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await api.post("payments/", {
+        reservation: reservation.id,
+        amount: 5000,
+        payment_method: "Cash",
+        bank_name: "",
+        account_number: "",
+        transaction_reference: "TXN" + Date.now(),
+      });
 
       alert("Payment submitted successfully!");
     } catch (error) {

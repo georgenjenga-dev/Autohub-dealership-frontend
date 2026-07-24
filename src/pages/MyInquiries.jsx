@@ -1,24 +1,18 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function MyInquiries() {
   const [inquiries, setInquiries] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("access");
-
-    axios
-      .get("https://autohub-delership-backend.vercel.app//api/inquiries/my_inquiries/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    api
+      .get("inquiries/my_inquiries/")
       .then((response) => setInquiries(response.data))
-     .catch((error)=>{
-    console.log("INQUIRY ERROR:", error.response?.data);
-    alert(JSON.stringify(error.response?.data));
-  })
-})
+      .catch((error) => {
+        console.log("INQUIRY ERROR:", error.response?.data);
+        alert(JSON.stringify(error.response?.data));
+      });
+  }, []);
   return (
     <div className="container">
       <h1>My Inquiries</h1>

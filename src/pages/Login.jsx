@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -12,13 +12,10 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://autohub-delership-backend.vercel.app//api/token/",
-        {
-          username,
-          password,
-        }
-      );
+      const response = await api.post("token/", {
+        username,
+        password,
+      });
 
       localStorage.setItem("access", response.data.access);
       localStorage.setItem("refresh", response.data.refresh);

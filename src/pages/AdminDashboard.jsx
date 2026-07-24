@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function AdminDashboard() {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("access");
-
-    axios
-      .get("https://autohub-delership-backend.vercel.app//api/dashboard/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    api
+      .get("dashboard/")
       .then((response) => setStats(response.data))
       .catch((error) => console.log(error));
   }, []);

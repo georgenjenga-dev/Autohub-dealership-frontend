@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 function AdminRoute({ children }) {
   const [loading, setLoading] = useState(true);
@@ -14,12 +14,8 @@ function AdminRoute({ children }) {
       return;
     }
 
-    axios
-      .get("https://autohub-delership-backend.vercel.app//api/me/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    api
+      .get("me/")
       .then((response) => {
         setIsStaff(response.data.is_staff);
         setLoading(false);
