@@ -11,21 +11,30 @@ function Cars() {
     api
       .get("vehicles/")
       .then((response) => {
-        console.log(response.data);
-        console.log(response.data.results);
-        setCars(response.data.results);
+        const raw = response.data;
+        const vehicles = Array.isArray(raw.results)
+          ? raw.results
+          : Array.isArray(raw)
+          ? raw
+          : [];
+
+        setCars(Array.isArray(vehicles) ? vehicles : []);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setCars([]);
+      });
   }, []);
+  const filteredCars = Array.isArray(cars)
+    ? cars.filter(
+        (car) =>
+          car.model?.toLowerCase().includes(search.toLowerCase()) ||
+          car.brand?.name?.toLowerCase().includes(search.toLowerCase())
+      )
+    : [];
 
-  const filteredCars = cars.filter((car) => {
-    const query = search.toLowerCase();
-
-    return (
-      car.model.toLowerCase().includes(query) ||
-      car.brand.name.toLowerCase().includes(query)
-    );
-  });
+  console.log("Cars state:", cars);
+  console.log("Cars length:", Array.isArray(cars) ? cars.length : 0);
 
   return (
     <div className="container">
@@ -33,17 +42,15 @@ function Cars() {
 
       <SearchBar search={search} setSearch={setSearch} />
 
-      {filteredCars.length === 0 ? (
-        <h3 style={{ marginTop: "30px", textAlign: "center" }}>
-          No vehicles found.
-        </h3>
-      ) : (
-        <div className="cars-grid">
-          {filteredCars.map((car) => (
+      <div className="cars-grid">
+        {filteredCars.length > 0 ? (
+          filteredCars.map((car) => (
             <CarCard key={car.id} car={car} />
-          ))}
-        </div>
-      )}
+          ))
+        ) : (
+          <h2>No vehicles found.</h2>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 function Register() {
   const navigate = useNavigate();
@@ -24,10 +24,7 @@ function Register() {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "https://autohub-delership-backend.vercel.app//api/register/",
-        formData
-      );
+      await api.post("register/", formData);
 
       alert("Registration Successful!");
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,28 +11,19 @@ function Navbar() {
   const token = localStorage.getItem("access");
 
   useEffect(() => {
+    const token = localStorage.getItem("access");
 
-  const token = localStorage.getItem("access");
+    if (!token) return;
 
-  if (!token) return;
-
-  axios
-    .get(
-      "https://autohub-delership-backend.vercel.app//api/me/",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then((response) => {
-      setIsStaff(response.data.is_staff);
-    })
-    .catch((error)=>{
-      console.log(error.response?.data);
-    });
-
-}, []);
+    api
+      .get("me/")
+      .then((response) => {
+        setIsStaff(response.data.is_staff);
+      })
+      .catch((error) => {
+        console.log(error.response?.data);
+      });
+  }, []);
 
   const logout = () => {
     localStorage.removeItem("access");

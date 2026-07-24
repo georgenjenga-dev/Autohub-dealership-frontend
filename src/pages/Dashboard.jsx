@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 function Dashboard() {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("https://autohub-delership-backend.vercel.app//api/dashboard/")
+    api
+      .get("dashboard/")
       .then((response) => {
         setStats(response.data);
       })

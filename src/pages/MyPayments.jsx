@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function MyPayments() {
   const [payments, setPayments] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("access");
-
-    axios
-      .get("http://127.0.0.1:8000/api/payments/my_payments/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    api
+      .get("payments/my_payments/")
       .then((response) => setPayments(response.data))
       .catch((error) => console.log(error));
   }, []);

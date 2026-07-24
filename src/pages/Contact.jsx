@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function Contact() {
 
@@ -17,19 +17,10 @@ function Contact() {
     }
 
     try {
-
-      await axios.post(
-        "https://autohub-delership-backend.vercel.app//api/inquiries/",
-        {
-          vehicle: vehicle,
-          message: message,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await api.post("inquiries/", {
+        vehicle,
+        message,
+      });
 
       alert("Inquiry sent successfully!");
 

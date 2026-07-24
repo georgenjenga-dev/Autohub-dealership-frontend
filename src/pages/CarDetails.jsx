@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 function CarDetails() {
   const { id } = useParams();
@@ -11,8 +11,8 @@ function CarDetails() {
 
 
  useEffect(() => {
-  axios
-    .get(`http://127.0.0.1:8000/api/vehicles/${id}/`)
+  api
+    .get(`vehicles/${id}/`)
     .then((response) => setCar(response.data))
     .catch((error) => console.log(error));
 }, [id]);
@@ -34,8 +34,8 @@ function CarDetails() {
   }
 
   try {
-    await axios.post(
-      "https://autohub-delership-backend.vercel.app//api/reservations/",
+    await api.post(
+      "reservations/",
       {
         vehicle: car.id,
         notes: "",
