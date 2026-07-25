@@ -4,11 +4,13 @@ import api from "../services/api";
 
 function Home() {
   const [cars, setCars] = useState([]);
+  const [debug, setDebug] = useState(null);
 
   useEffect(() => {
     api
       .get("vehicles/")
       .then((response) => {
+        setDebug(response.data);
         const raw = response.data;
         const vehicles = Array.isArray(raw.results)
           ? raw.results
@@ -19,7 +21,8 @@ function Home() {
         setCars(Array.isArray(vehicles) ? vehicles.slice(0, 3) : []);
       })
       .catch((error) => {
-        console.log(error);
+        console.error("Home fetch error:", error.response?.data || error.message || error);
+        setDebug({ error: error.response?.data || error.message });
         setCars([]);
       });
   }, []);
@@ -76,7 +79,14 @@ function Home() {
               </div>
             ))
           ) : (
-            <p>No featured vehicles available.</p>
+            <>
+              <p>No featured vehicles available.</p>
+              {debug && (
+                <pre style={{ whiteSpace: "pre-wrap", marginTop: 12 }}>
+                  {JSON.stringify(debug, null, 2)}
+                </pre>
+              )}
+            </>
           )}
         </div>
       </section>
