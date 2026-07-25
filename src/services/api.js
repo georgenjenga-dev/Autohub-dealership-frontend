@@ -30,4 +30,26 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// Retry once against deployed backend if a request fails (helps when local backend is down)
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const config = error.config;
+    if (!config) return Promise.reject(error);
+
+    // only retry once
+    if (config.__isRetry) return Promise.reject(error);
+
+    config.__isRetry = true;
+
+    try {
+      // switch to deployed backend and retry
+      config.baseURL = "https://autohub-delership-backend.vercel.app/api/";
+      return axios(config);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+);
+
 export default api;
