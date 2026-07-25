@@ -6,11 +6,13 @@ import api from "../services/api";
 function Cars() {
   const [cars, setCars] = useState([]);
   const [search, setSearch] = useState("");
+  const [debug, setDebug] = useState(null);
 
   useEffect(() => {
     api
       .get("vehicles/")
       .then((response) => {
+        setDebug(response.data);
         const raw = response.data;
         const vehicles = Array.isArray(raw.results)
           ? raw.results
@@ -21,7 +23,8 @@ function Cars() {
         setCars(Array.isArray(vehicles) ? vehicles : []);
       })
       .catch((error) => {
-        console.log(error);
+        console.error("Cars fetch error:", error.response?.data || error.message || error);
+        setDebug({ error: error.response?.data || error.message });
         setCars([]);
       });
   }, []);
@@ -48,7 +51,14 @@ function Cars() {
             <CarCard key={car.id} car={car} />
           ))
         ) : (
-          <h2>No vehicles found.</h2>
+          <>
+            <h2>No vehicles found.</h2>
+            {debug && (
+              <pre style={{ whiteSpace: "pre-wrap", marginTop: 12 }}>
+                {JSON.stringify(debug, null, 2)}
+              </pre>
+            )}
+          </>
         )}
       </div>
     </div>

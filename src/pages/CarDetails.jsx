@@ -52,9 +52,14 @@ function CarDetails() {
     navigate("/my-reservations");
 
   } catch (error) {
-    console.log(error);
+    console.error("Reservation error:", error.response?.data || error.message || error);
+    const message =
+      error.response?.data?.detail ||
+      error.response?.data ||
+      error.message ||
+      "Reservation failed.";
 
-    alert("Reservation failed.");
+    alert(typeof message === "string" ? message : JSON.stringify(message));
   }
 };
 
@@ -130,7 +135,7 @@ function CarDetails() {
   📅 Reserve Vehicle
 </button>
             <a
-              href="https://wa.me/254700000000"
+              href="https://wa.me/254784476929"
               target="_blank"
               rel="noreferrer"
             >

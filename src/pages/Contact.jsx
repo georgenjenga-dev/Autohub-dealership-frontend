@@ -77,7 +77,7 @@ function Contact() {
 
 
           <p>
-            📞 +254 716 323 929
+            📞 0784476929
           </p>
 
 
@@ -93,7 +93,7 @@ function Contact() {
 
 
           <a
-            href="https://wa.me/254716323929"
+            href="https://wa.me/254784476929"
             target="_blank"
             rel="noreferrer"
           >

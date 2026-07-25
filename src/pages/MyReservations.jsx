@@ -77,7 +77,7 @@ function MyReservations() {
 
            
             <a
-              href={`https://wa.me/254716323929?text=Hello AutoHub, I reserved the ${reservation.brand} ${reservation.vehicle_name} and would like more information.`}
+              href={`https://wa.me/254784476929?text=Hello AutoHub, I reserved the ${reservation.brand} ${reservation.vehicle_name} and would like more information.`}
               target="_blank"
               rel="noreferrer"
             >

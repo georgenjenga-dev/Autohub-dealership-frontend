@@ -29,7 +29,7 @@ function Footer() {
 
           <p>📍 Nairobi, Kenya</p>
 
-          <p>📞 +254 716 323929</p>
+          <p>📞 0784476929</p>
 
           <p>✉ info@autohub.co.ke</p>
 
