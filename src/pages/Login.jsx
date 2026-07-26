@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 
 function Login() {
@@ -30,28 +30,58 @@ function Login() {
   };
 
   return (
-    <div className="container">
-      <h1>Customer Login</h1>
+    <div className="auth-container">
+      <div className="auth-card">
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <div className="auth-logo">
+          🚗
+        </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <h1>Welcome Back</h1>
 
-        <button type="submit">
-          Login
-        </button>
-      </form>
+        <p>
+          Sign in to access your AutoHub account.
+        </p>
+
+        <form onSubmit={handleLogin}>
+
+          <label>Username</label>
+
+          <input
+            type="text"
+            placeholder="Enter your username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+
+          <label>Password</label>
+
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button
+            type="submit"
+            className="auth-btn"
+          >
+            Login
+          </button>
+
+        </form>
+
+        <div className="auth-footer">
+          Don't have an account?{" "}
+          <Link to="/register">
+            Register Here
+          </Link>
+        </div>
+
+      </div>
     </div>
   );
 }

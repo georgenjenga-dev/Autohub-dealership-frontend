@@ -1670,68 +1670,6 @@ form { width: 100%; }
 }
 /* ==========================
    LOGIN & REGISTER
-========================== */
-
-.auth-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #2563eb);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-}
-
-.auth-card {
-  width: 100%;
-  max-width: 450px;
-  background: #fff;
-  padding: 40px;
-  border-radius: 18px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-}
-
-.auth-logo {
-  text-align: center;
-  font-size: 60px;
-  margin-bottom: 15px;
-}
-
-.auth-card h1 {
-  text-align: center;
-  color: #0f172a;
-  margin-bottom: 10px;
-}
-
-.auth-card p {
-  text-align: center;
-  color: #6b7280;
-  margin-bottom: 30px;
-}
-
-.auth-card form {
-  display: flex;
-  flex-direction: column;
-}
-
-.auth-card label {
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #374151;
-}
-
-.auth-card input {
-  padding: 14px;
-  margin-bottom: 20px;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: 0.3s;
-  outline: none;
-}
-
-.auth-card input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 8px rgba(37,99,235,0.25);
 }
 
 .auth-btn {
