@@ -64,7 +64,7 @@ function Contact() {
       <div className="contact-grid">
 
 
-        <div className="contact-info">
+        <div className="contact-info-panel">
 
           <h2>
             Get in Touch
@@ -114,7 +114,7 @@ function Contact() {
 
 
 
-        <div className="contact-form">
+        <div className="contact-form-panel">
 
 
           <h2>
