@@ -34,7 +34,7 @@ function Login() {
       <div className="auth-card">
 
         <div className="auth-logo">
-          🚗
+          
         </div>
 
         <h1>Welcome Back</h1>

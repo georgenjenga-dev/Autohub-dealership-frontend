@@ -96,21 +96,21 @@ function Home() {
 
         <div className="features">
           <div className="feature-box">
-            <h3>🚗 Premium Vehicles</h3>
+            <h3> Premium Vehicles</h3>
             <p>
               Carefully inspected vehicles from trusted dealerships.
             </p>
           </div>
 
           <div className="feature-box">
-            <h3>💰 Fair Pricing</h3>
+            <h3> Fair Pricing</h3>
             <p>
               Competitive pricing with transparent vehicle information.
             </p>
           </div>
 
           <div className="feature-box">
-            <h3>📱 Direct Dealer Contact</h3>
+            <h3> Direct Dealer Contact</h3>
             <p>
               Reserve online and chat directly with our sales team via WhatsApp.
             </p>

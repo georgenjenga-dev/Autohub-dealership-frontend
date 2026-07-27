@@ -34,7 +34,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="logo">
-        <Link to="/">🚗 AutoHub</Link>
+        <Link to="/"> AutoHub</Link>
       </div>
 
       <div

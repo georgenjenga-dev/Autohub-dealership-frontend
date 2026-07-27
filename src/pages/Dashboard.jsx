@@ -39,31 +39,31 @@ function Dashboard() {
       <div className="dashboard-grid">
 
         <div className="card">
-          <h1>🚗</h1>
+          <h1></h1>
           <h2>{stats.vehicles}</h2>
           <p>Total Vehicles</p>
         </div>
 
         <div className="card">
-          <h1>✅</h1>
+          <h1></h1>
           <h2>{stats.available_vehicles}</h2>
           <p>Available Vehicles</p>
         </div>
 
         <div className="card">
-          <h1>📅</h1>
+          <h1></h1>
           <h2>{stats.reservations}</h2>
           <p>Reservations</p>
         </div>
 
         <div className="card">
-          <h1>👤</h1>
+          <h1></h1>
           <h2>{stats.customers}</h2>
           <p>Customers</p>
         </div>
 
         <div className="card">
-          <h1>🏷️</h1>
+          <h1></h1>
           <h2>{stats.brands}</h2>
           <p>Brands</p>
         </div>
@@ -77,19 +77,19 @@ function Dashboard() {
         <div className="dashboard-buttons">
 
           <Link to="/cars">
-            <button>🚗 Browse Cars</button>
+            <button> Browse Cars</button>
           </Link>
 
           <Link to="/my-reservations">
-            <button>📅 My Reservations</button>
+            <button> My Reservations</button>
           </Link>
 
           <Link to="/my-inquiries">
-            <button>💬 My Inquiries</button>
+            <button> My Inquiries</button>
           </Link>
 
           <Link to="/contact">
-            <button>☎ Contact Dealer</button>
+            <button> Contact Dealer</button>
           </Link>
 
         </div>
