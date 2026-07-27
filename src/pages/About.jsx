@@ -14,7 +14,7 @@ function About() {
 
       <section className="about-section">
         <div className="about-card">
-          <h2>🚗 Our Mission</h2>
+          <h2> Our Mission</h2>
           <p>
             AutoHub aims to make buying a vehicle simple, transparent and
             convenient. We provide a platform where customers can browse,
@@ -23,7 +23,7 @@ function About() {
         </div>
 
         <div className="about-card">
-          <h2>🌍 Our Vision</h2>
+          <h2> Our Vision</h2>
           <p>
             To become the leading digital automobile marketplace in Kenya by
             providing trusted vehicle listings and exceptional customer
@@ -32,7 +32,7 @@ function About() {
         </div>
 
         <div className="about-card">
-          <h2>⭐ Why Choose AutoHub?</h2>
+          <h2> Why Choose AutoHub?</h2>
 
           <ul>
             <li>✔ Carefully verified vehicle listings</li>
@@ -44,7 +44,7 @@ function About() {
         </div>
 
         <div className="about-card">
-          <h2>📈 Our Services</h2>
+          <h2> Our Services</h2>
 
           <ul>
             <li>New & Used Vehicle Sales</li>

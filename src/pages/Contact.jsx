@@ -72,22 +72,22 @@ function Contact() {
 
 
           <p>
-            📍 Nairobi, Kenya
+             Nairobi, Kenya
           </p>
 
 
           <p>
-            📞 0784476929
+             0784476929
           </p>
 
 
           <p>
-            ✉ support@autohub.co.ke
+            support@autohub.co.ke
           </p>
 
 
           <p>
-            🕘 Mon - Sat : 8:00 AM - 6:00 PM
+             Mon - Sat : 8:00 AM - 6:00 PM
           </p>
 
 
@@ -100,7 +100,7 @@ function Contact() {
 
             <button className="whatsapp-btn">
 
-              💬 Chat on WhatsApp
+               Chat on WhatsApp
 
             </button>
 

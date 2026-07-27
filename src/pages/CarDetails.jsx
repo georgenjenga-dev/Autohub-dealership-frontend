@@ -132,7 +132,7 @@ function CarDetails() {
   className="reserve-btn"
   onClick={reserveVehicle}
 >
-  📅 Reserve Vehicle
+   Reserve Vehicle
 </button>
             <a
               href="https://wa.me/254784476929"
@@ -140,7 +140,7 @@ function CarDetails() {
               rel="noreferrer"
             >
               <button className="whatsapp-btn">
-                💬 WhatsApp Dealer
+                 WhatsApp Dealer
               </button>
             </a>
 
